@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import NuevoProyecto from '../projects/NuevoProyecto'
+import ListadoProyectos from '../projects/Listado'
 
 const Sidebar = props => {
     return (
@@ -9,6 +10,7 @@ const Sidebar = props => {
             <NuevoProyecto />
             <div className="proyectos">
                 <h2>Tus proyectos</h2>
+                <ListadoProyectos />
             </div>
         </aside>
     )
