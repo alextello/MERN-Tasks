@@ -17,11 +17,12 @@ const ListadoTareas = props => {
             <ul className="listado-tareas">
                 { tareasProyecto.length === 0
                 ? (<li className="tarea"><p>No hay tareas</p></li>)
-                : (tareasProyecto.map(tarea => (
-                    <Tarea tarea={tarea} />
+                : (tareasProyecto.map((tarea, i) => (
+                    <Tarea tarea={tarea} key={i}/>
                 )))
                 }
             </ul>
+            <button type="button" className="btn btn-eliminar">Eliminar proyecto &times;</button>
         </Fragment>
     )
 }

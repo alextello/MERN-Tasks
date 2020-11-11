@@ -16,9 +16,10 @@ const ListadoProyectos = props => {
     ]
     return (
         <ul className="listado-proyectos">
-            {proyectos.map(proyecto => (
+            {proyectos.map((proyecto, i) => (
                 <Proyecto
                 proyecto={proyecto}
+                key={i}
                 />
             ))}
         </ul>
