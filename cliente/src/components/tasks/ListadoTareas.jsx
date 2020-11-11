@@ -6,7 +6,7 @@ import proyectoContext from '../../context/proyectos/proyectoContext';
 const ListadoTareas = props => {
     // obtener el state del formulario
     const proyectosContext = useContext(proyectoContext);
-    const { proyecto } = proyectosContext;
+    const { proyecto, eliminarProyecto } = proyectosContext;
 
     // Si no hay proyecto seleccionado...
     if(!proyecto) {
@@ -23,6 +23,11 @@ const ListadoTareas = props => {
         {nombre: 'Elegir hosting', estado: false},
     ]
 
+    // Elimina un proyecto
+    const onClickEliminar = () => {
+        eliminarProyecto(proyectoActual.id)
+    }
+
     return (
         <Fragment>
             <h2>
@@ -36,7 +41,7 @@ const ListadoTareas = props => {
                 )))
                 }
             </ul>
-            <button type="button" className="btn btn-eliminar">Eliminar proyecto &times;</button>
+            <button type="button" className="btn btn-eliminar" onClick={onClickEliminar}>Eliminar proyecto &times;</button>
         </Fragment>
     )
 }

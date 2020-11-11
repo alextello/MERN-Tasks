@@ -14,7 +14,7 @@ const ListadoProyectos = props => {
     }, [])
 
     // Revisar si hay proyectos
-    if (proyectos.length === 0) return null;
+    if (proyectos.length === 0) return <p>No hay proyectos</p>;
     return (
         <ul className="listado-proyectos">
             {proyectos.map((proyecto, i) => (
