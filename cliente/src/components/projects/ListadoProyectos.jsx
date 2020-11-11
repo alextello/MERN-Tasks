@@ -20,7 +20,7 @@ const ListadoProyectos = props => {
             {proyectos.map((proyecto, i) => (
                 <Proyecto
                 proyecto={proyecto}
-                key={i}
+                key={proyecto.id}
                 />
             ))}
         </ul>
