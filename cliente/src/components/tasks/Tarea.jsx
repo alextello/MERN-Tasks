@@ -6,12 +6,23 @@ const Tarea = ({tarea}) => {
 
     // obtener el state de tareas
     const tareasContext = useContext(tareaContext);
-    const  { eliminarTarea, obtenerTareas } = tareasContext;
+    const  { eliminarTarea, obtenerTareas, cambiarEstadoTarea, guardarTareaActual } = tareasContext;
+
 
     // Funcion que elimina tarea
     const onClick = () => {
         eliminarTarea(tarea.id);
         obtenerTareas(tarea.proyectoId);
+    }
+
+    // Funcion para cambiar estado de tarea
+    const cambiarEstado = () => {
+        tarea.estado = !tarea.estado;
+        cambiarEstadoTarea(tarea);
+    }
+
+    const seleccionarTarea = () => {
+        guardarTareaActual(tarea);
     }
 
     return (
@@ -20,13 +31,20 @@ const Tarea = ({tarea}) => {
             <div className="estado">
                 { tarea.estado
                 ?
-                    (<button type="button" className="completo">Completo</button>)
+                    (<button type="button" onClick={cambiarEstado} className="completo">Completo</button>)
                     :
-                    (<button type="button" className="incompleto">Incompleto</button>)
+                    (<button type="button" onClick={cambiarEstado} className="incompleto">Incompleto</button>)
                 }
             </div>
             <div className="acciones">
-                <button type="button" className="btn btn-primario">Editar</button>
+                <button
+                type="button"
+                className="btn btn-primario"
+                onClick={seleccionarTarea}
+                >
+                    Editar
+                </button>
+
                 <button
                 type="button"
                 className="btn btn-secundario"
@@ -40,7 +58,7 @@ const Tarea = ({tarea}) => {
 }
 
 Tarea.propTypes = {
-
+    tarea: PropTypes.object
 }
 
 export default Tarea

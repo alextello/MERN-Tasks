@@ -1,6 +1,5 @@
-import React, {useState, useReducer } from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom'
-import PropTypes from 'prop-types'
 
 const Login = props => {
     // state para iniciar sesion
@@ -64,10 +63,6 @@ const Login = props => {
             </div>
         </div>
     )
-}
-
-Login.propTypes = {
-
 }
 
 export default Login

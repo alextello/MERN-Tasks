@@ -1,8 +1,6 @@
-import React, { useContext, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useContext, useState, useEffect } from 'react'
 import proyectoContext from '../../context/proyectos/proyectoContext';
 import tareaContext from '../../context/tasks/TareaContext';
-
 
 const FormTarea = props => {
     // Extraer si un proyecto esta activo
@@ -11,12 +9,23 @@ const FormTarea = props => {
 
      // obtener el state de tareas
      const tareasContext = useContext(tareaContext);
-     const  { errorTarea, agregarTarea, validarTarea, obtenerTareas  } = tareasContext;
+     const  { tareaSeleccionada, errorTarea, agregarTarea, validarTarea, obtenerTareas, actualizarTarea, limpiarTarea } = tareasContext;
 
     // State del formulario
     const [tarea, guardarTarea] = useState({
     nombre: '',
     });
+
+    // useEffect para estado de tarea seleccionada
+    useEffect(() => {
+        if(tareaSeleccionada !== null) {
+            guardarTarea(tareaSeleccionada);
+        } else {
+            guardarTarea({
+                nombre: ''
+            })
+        }
+    }, [tareaSeleccionada])
 
     // Extraer el nombre del proyecto
     const {nombre} = tarea;
@@ -43,18 +52,25 @@ const FormTarea = props => {
             validarTarea();
             return;
         }
-        // Pasar validacion
-
-        // Agregar tarea
-        let nuevaTarea = {...tarea, proyectoId: proyectoActual.id, estado: false};
-        guardarTarea(nuevaTarea);
-        agregarTarea(nuevaTarea);
+        // Verificar si es edicion o nueva tarea
+        if(tareaSeleccionada === null) {
+            // Tarea nueva
+            // Agregar tarea
+            let tareaNueva = {...tarea, proyectoId: proyectoActual.id, estado: false}
+            guardarTarea(tareaNueva);
+            agregarTarea(tareaNueva);
+        } else {
+            // Actualiza tarea
+            actualizarTarea(tarea);
+            // Elimina tarea seleccionada del state
+            limpiarTarea();
+        }
+        // Obtener y filtrar tareas del proyecto actual
+        obtenerTareas(proyectoActual.id);
         // Reinicar form
         guardarTarea({
             nombre: ''
         })
-        // Obtener y filtrar tareas del proyecto actual
-        obtenerTareas(proyectoActual.id);
     }
 
 
@@ -73,7 +89,7 @@ const FormTarea = props => {
                 <div className="contenedor-input">
                     <input
                     type="submit"
-                    value="Agregar tarea"
+                    value={tareaSeleccionada ? 'Editar tarea' : 'Agregar tarea'}
                     className="btn btn-primario btn-submit btn-block"
                     />
                 </div>
@@ -83,8 +99,5 @@ const FormTarea = props => {
     )
 }
 
-FormTarea.propTypes = {
-
-}
 
 export default FormTarea

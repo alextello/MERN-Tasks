@@ -1,8 +1,9 @@
 import React, {Fragment, useContext} from 'react';
-import PropTypes from 'prop-types';
 import Tarea from './Tarea';
 import proyectoContext from '../../context/proyectos/proyectoContext';
 import tareaContext from '../../context/tasks/TareaContext';
+import {CSSTransition, TransitionGroup} from 'react-transition-group'
+
 const ListadoTareas = props => {
     // obtener el state del formulario
     const proyectosContext = useContext(proyectoContext);
@@ -33,18 +34,21 @@ const ListadoTareas = props => {
             <ul className="listado-tareas">
                 { tareasProyecto.length === 0
                 ? (<li className="tarea"><p>No hay tareas</p></li>)
-                : (tareasProyecto.map((tarea, i) => (
-                    <Tarea tarea={tarea} key={i}/>
-                )))
+                : <TransitionGroup>
+                {tareasProyecto.map((tarea, i) => (
+                    <CSSTransition
+                    timeout={200}
+                    classNames="tarea"
+                    key={i}>
+                        <Tarea tarea={tarea}/>
+                    </CSSTransition>
+                ))}
+                </TransitionGroup>
                 }
             </ul>
             <button type="button" className="btn btn-eliminar" onClick={onClickEliminar}>Eliminar proyecto &times;</button>
         </Fragment>
     )
-}
-
-ListadoTareas.propTypes = {
-
 }
 
 export default ListadoTareas

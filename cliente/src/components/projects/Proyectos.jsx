@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
 import Sidebar from '../layout/Sidebar'
 import Barra from '../layout/Barra'
 import FormTarea from "../tasks/FormTarea";
@@ -20,10 +19,6 @@ const Proyectos = props => {
             </div>
         </div>
     )
-}
-
-Proyectos.propTypes = {
-
 }
 
 export default Proyectos

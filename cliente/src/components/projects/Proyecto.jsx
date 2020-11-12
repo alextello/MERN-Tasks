@@ -32,7 +32,7 @@ const Proyecto = ({proyecto}) => {
 }
 
 Proyecto.propTypes = {
-
+ proyecto: PropTypes.object
 }
 
 export default Proyecto

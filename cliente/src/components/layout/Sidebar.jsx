@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import NuevoProyecto from '../projects/NuevoProyecto'
 import ListadoProyectos from '../projects/ListadoProyectos'
 
@@ -14,10 +13,6 @@ const Sidebar = props => {
             </div>
         </aside>
     )
-}
-
-Sidebar.propTypes = {
-
 }
 
 export default Sidebar

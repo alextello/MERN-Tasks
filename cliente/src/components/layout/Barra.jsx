@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 const Barra = props => {
     return (
@@ -10,10 +9,6 @@ const Barra = props => {
             </nav>
         </header>
     )
-}
-
-Barra.propTypes = {
-
 }
 
 export default Barra

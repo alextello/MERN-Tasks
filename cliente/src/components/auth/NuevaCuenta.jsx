@@ -1,6 +1,5 @@
-import React, {useState, useReducer } from 'react';
+import React, {useState } from 'react';
 import {Link} from 'react-router-dom'
-import PropTypes from 'prop-types'
 
 const NuevaCuenta = props => {
       // state para iniciar sesion
@@ -92,10 +91,6 @@ const NuevaCuenta = props => {
         </div>
     </div>
     )
-}
-
-NuevaCuenta.propTypes = {
-
 }
 
 export default NuevaCuenta

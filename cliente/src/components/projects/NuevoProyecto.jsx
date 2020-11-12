@@ -1,5 +1,4 @@
 import React, {Fragment, useState, useContext} from 'react'
-import PropTypes from 'prop-types'
 import proyectoContext from '../../context/proyectos/proyectoContext';
 
 const NuevoProyecto = props => {
@@ -80,10 +79,6 @@ const NuevoProyecto = props => {
         </Fragment>
 
     )
-}
-
-NuevoProyecto.propTypes = {
-
 }
 
 export default NuevoProyecto
