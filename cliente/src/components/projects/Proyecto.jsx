@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import PropTypes from 'prop-types'
 import proyectoContext from '../../context/proyectos/proyectoContext';
+import tareaContext from '../../context/tasks/TareaContext';
 
 const Proyecto = ({proyecto}) => {
 
@@ -8,11 +9,21 @@ const Proyecto = ({proyecto}) => {
        const proyectosContext = useContext(proyectoContext);
        const  {proyectoActual } = proyectosContext;
 
+       // obtener el state de tareas
+       const tareasContext = useContext(tareaContext);
+       const  { obtenerTareas } = tareasContext;
+
+       // Funcion para agregar el proyecto actual
+       const seleccionarProyecto = id =>{
+            proyectoActual(id); // Fijar proyecto actual
+            obtenerTareas(id); // obtener tareas de proyecto fijado
+       }
+
     return (
         <li>
             <button
             className="btn btn-blank"
-            onClick={() => proyectoActual(proyecto.id)}
+            onClick={() => seleccionarProyecto(proyecto.id)}
             >
                 {proyecto.nombre}
             </button>

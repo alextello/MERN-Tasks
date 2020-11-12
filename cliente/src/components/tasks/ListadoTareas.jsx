@@ -2,11 +2,15 @@ import React, {Fragment, useContext} from 'react';
 import PropTypes from 'prop-types';
 import Tarea from './Tarea';
 import proyectoContext from '../../context/proyectos/proyectoContext';
-
+import tareaContext from '../../context/tasks/TareaContext';
 const ListadoTareas = props => {
     // obtener el state del formulario
     const proyectosContext = useContext(proyectoContext);
     const { proyecto, eliminarProyecto } = proyectosContext;
+
+    // obtener el state de tareas
+    const tareasContext = useContext(tareaContext);
+    const  { tareasProyecto } = tareasContext;
 
     // Si no hay proyecto seleccionado...
     if(!proyecto) {
@@ -15,8 +19,6 @@ const ListadoTareas = props => {
 
     // Array destructuring para proyecto actual
     const [proyectoActual] = proyecto;
-
-    const tareasProyecto = [];
 
     // Elimina un proyecto
     const onClickEliminar = () => {
