@@ -12,7 +12,7 @@ router.post('/',
     [
         check('nombre', 'El nombre es obligatorio').notEmpty(),
         check('email', 'Agrega un email valido').isEmail(),
-        check('password', 'El password debe ser mínimo de 6 caracteres').isLength({ min: 6 })
+        check('password', 'El password debe ser mínimo de 6 caracteres').isLength({ min: 6 }),
     ],
     usuarioController.crearUsuario);
 

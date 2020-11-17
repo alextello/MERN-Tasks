@@ -1,5 +1,6 @@
 const Usuario = require('../models/Usuario');
 const { validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
 /* ------------------------- Controlador de usuarios ------------------------ */
 const crearUsuario = async (req, res) => {
     // Revisar si hay errores
@@ -9,7 +10,7 @@ const crearUsuario = async (req, res) => {
     }
 
     // Extraer email y password
-    const { email, password } = req.body;
+    const { email } = req.body;
 
     try {
         // Revisar si hay un usuario previo
@@ -25,8 +26,21 @@ const crearUsuario = async (req, res) => {
         // Guardar nuevo usuario
         await usuario.save();
 
+        // Crear y firmar JWT
+        const payload = {
+            usuario: {
+                id: usuario.id
+            }
+        };
+
+        // Firmar JWT
+        jwt.sign(payload, process.env.SECRET, {
+            expiresIn: '1d'
+        }, (err, token) => {
+            if (err) throw error;
+            return res.json({ token });
+        });
         // Mensaje de confirmacion
-        return res.json({ msg: 'Usuario creado correctamente' });
     } catch (error) {
         console.log(error)
         res.status(400).send('Hubo un error ' + error);
