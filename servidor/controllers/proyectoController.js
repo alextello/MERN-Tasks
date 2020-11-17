@@ -75,7 +75,21 @@ const actualizarProyecto = async (req, res) => {
 /* --------------------------- Elimina un proyecto -------------------------- */
 const eliminarProyecto = async (req, res) => {
     try {
+        // Obtener ID
         const id = req.params.id;
+        const proyecto = await Proyecto.findById(id);
+
+        // Revisar si existe proyecto
+        if (!proyecto) {
+            return res.status(404).json({ msg: 'Proyecto no encontrado' });
+        }
+
+        // Verificar al creador del proyecto
+        if (proyecto.creador.toString() !== req.usuario.id) {
+            return res.status(401).json({ msg: 'No autorizado' });
+        }
+
+        // Elimina proyecto
         const proyecto = await Proyecto.findOneAndDelete({ _id: id }).exec();
         return res.json({ proyecto });
     } catch (error) {
