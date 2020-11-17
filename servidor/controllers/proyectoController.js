@@ -90,8 +90,8 @@ const eliminarProyecto = async (req, res) => {
         }
 
         // Elimina proyecto
-        const proyecto = await Proyecto.findOneAndDelete({ _id: id }).exec();
-        return res.json({ proyecto });
+        const proyectoEliminado = await Proyecto.findOneAndDelete({ _id: id }).exec();
+        return res.json({ proyectoEliminado });
     } catch (error) {
         console.log(error);
         res.status(500).json({ msg: 'Hubo un error' });
