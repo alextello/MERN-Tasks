@@ -22,7 +22,9 @@ const autenticarUsuario = async (req, res) => {
             res.status(400).json({ msg: 'Password incorrecto' });
         }
         const payload = {
-            usuario: usuario.id
+            usuario: {
+                id: usuario.id
+            }
         }
         // Generar JWT
         jwt.sign(payload, process.env.SECRET, {
