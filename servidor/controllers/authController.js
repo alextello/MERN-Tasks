@@ -38,6 +38,18 @@ const autenticarUsuario = async (req, res) => {
     }
 };
 
+// Obtiene qué usuario está autenticado
+const usuarioAutenticado = async (req, res) => {
+    try {
+        const usuario = await Usuario.findById(req.usuario.id).select('-password');
+        return res.json({ usuario });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ msg: 'Hubo un error' })
+    }
+}
+
 module.exports = {
-    autenticarUsuario
+    autenticarUsuario,
+    usuarioAutenticado
 }
