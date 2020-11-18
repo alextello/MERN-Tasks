@@ -15,11 +15,11 @@ const autenticarUsuario = async (req, res) => {
     try {
         const usuario = await Usuario.findOne({ email }).exec();
         if (!usuario) {
-            res.status(400).json({ msg: 'No se encontró el usuario' });
+            return res.status(400).json({ msg: 'No se encontró el usuario' });
         }
         const passCorrecto = await bcrypt.compareSync(password, usuario.password);
         if (!passCorrecto) {
-            res.status(400).json({ msg: 'Password incorrecto' });
+            return res.status(400).json({ msg: 'Password incorrecto' });
         }
         const payload = {
             usuario: {
