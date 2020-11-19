@@ -37,6 +37,7 @@ export default (state, action) => {
         case CERRAR_SESION:
             localStorage.removeItem('token');
             return {
+                ...state,
                 autenticado: false,
                 usuario: null,
                 token: null
