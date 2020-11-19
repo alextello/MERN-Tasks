@@ -2,31 +2,21 @@ import React from 'react';
 import { useReducer } from 'react';
 import proyectoContext from './proyectoContext';
 import proyectoReducer from './proyectoReducer';
-import {FORMULARIO_PROYECTO
+import clienteAxios from '../../config/axios.js';
+
+import {
+    FORMULARIO_PROYECTO
     , OBTENER_PROYECTOS
     , AGREGAR_PROYECTO
     , VALIDAR_FORMULARIO
     , PROYECTO_ACTUAL
-    , ELIMINAR_PROYECTO} from '../../types';
-import { v4 as uuid } from 'uuid';
+    , ELIMINAR_PROYECTO
+} from '../../types';
+
 const ProyectoState = props => {
 
-const proyectos = [
-    {
-        id: 1,
-        nombre: 'Tienda virtual',
-    },
-    {
-        id: 2,
-        nombre: 'Red',
-    },
-    {
-        id: 3,
-        nombre: 'Sitio web',
-    }
-];
     const initialState = {
-        proyectos : [],
+        proyectos: [],
         formulario: false,
         errorFormulario: false,
         proyecto: null
@@ -43,21 +33,38 @@ const proyectos = [
     }
 
     // Obtener proyectos
-    const obtenerProyectos = () => {
-        dispatch({
-            type: OBTENER_PROYECTOS,
-            payload: proyectos
-        })
+    const obtenerProyectos = async () => {
+        try {
+            const respuesta = await clienteAxios.get('/api/proyectos');
+            dispatch({
+                type: OBTENER_PROYECTOS,
+                payload: respuesta.data.proyectos
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     // Agregar nuevo proyecto
-    const agregarProyecto = proyecto => {
-        proyecto.id = uuid();
+    const agregarProyecto = async proyecto => {
         // agregar proyecto al array
-        dispatch({
-            type: AGREGAR_PROYECTO,
-            payload: proyecto
-        })
+        try {
+            const resultado = await clienteAxios.post('/api/proyectos', proyecto);
+            dispatch({
+                type: AGREGAR_PROYECTO,
+                payload: resultado.data.proyecto
+            })
+        } catch (error) {
+            const alerta = {
+                msg: 'Hubo un error',
+                categoria: 'alerta-error'
+            }
+
+            // dispatch({
+            //     type: PROYECTO_ERROR,
+            //     payload: alerta
+            // })
+        }
     }
 
     // Valida el formulario por errores

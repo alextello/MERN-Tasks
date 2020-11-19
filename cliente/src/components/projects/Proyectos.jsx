@@ -18,7 +18,7 @@ return (
         <div className="contenedor-app">
             <Sidebar />
             <div className="seccion-principal">
-                <Barra></Barra>
+                <Barra />
                 <main>
                     <FormTarea />
                     <div className="contenedor-tareas">
