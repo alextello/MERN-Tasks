@@ -4,11 +4,8 @@ import AuthContext from '../../context/autenticacion/authContext';
 
 const RutaPublica = ({component: Component, ...props}) => {
     const authContext = useContext(AuthContext);
-    const {autenticado, cargando, usuarioAutenticado, token} = authContext;
+    const {autenticado, cargando, token} = authContext;
 
-    useEffect(() => {
-        usuarioAutenticado();
-    },[])
 
     return (
         <Route {...props}

@@ -11,6 +11,7 @@ const Proyectos = props => {
     const {usuarioAutenticado} = authContext;
     useEffect(()=> {
         usuarioAutenticado();
+        // eslint-disable-next-line
     }, []);
 return (
 <Fragment>
