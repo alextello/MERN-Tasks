@@ -56,7 +56,7 @@ const FormTarea = props => {
         if(tareaSeleccionada === null) {
             // Tarea nueva
             // Agregar tarea
-            let tareaNueva = {...tarea, proyectoId: proyectoActual.id, estado: false}
+            let tareaNueva = {...tarea, proyecto: proyectoActual._id}
             guardarTarea(tareaNueva);
             agregarTarea(tareaNueva);
         } else {

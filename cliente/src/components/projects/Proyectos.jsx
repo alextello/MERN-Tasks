@@ -1,10 +1,8 @@
 import React from 'react';
-import Sidebar from '../layout/Sidebar'
-import Barra from '../layout/Barra'
 import FormTarea from "../tasks/FormTarea";
 import ListadoTareas from "../tasks/ListadoTareas";
 import AuthContext from '../../context/autenticacion/authContext';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, Fragment } from 'react';
 
 const Proyectos = props => {
 
@@ -15,18 +13,12 @@ const Proyectos = props => {
         usuarioAutenticado();
     }, []);
 return (
-        <div className="contenedor-app">
-            <Sidebar />
-            <div className="seccion-principal">
-                <Barra />
-                <main>
-                    <FormTarea />
-                    <div className="contenedor-tareas">
-                        <ListadoTareas />
-                    </div>
-                </main>
-            </div>
-        </div>
+<Fragment>
+    <FormTarea />
+    <div className="contenedor-tareas">
+        <ListadoTareas />
+    </div>
+</Fragment>
     )
 }
 

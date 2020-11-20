@@ -12,7 +12,7 @@ const crearTarea = async (req, res) => {
     const proyectoId = req.body.proyecto;
     try {
         // Verificar dueño de proyecto
-        if (verificarProyecto(proyectoId, req, res)) {
+        if (await verificarProyecto(proyectoId, req, res)) {
             return;
         }
         // Creamos la tarea
@@ -32,7 +32,7 @@ const obtenerTareas = async (req, res) => {
         return;
     }
     // Extraer el proyecto
-    const proyectoId = req.body.proyecto;
+    const proyectoId = req.query.proyecto;
     try {
         // Verificar dueño de proyecto
         if (await verificarProyecto(proyectoId, req, res)) {
