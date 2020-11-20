@@ -60,11 +60,16 @@ const TareaState = props => {
     }
 
     // Valida y muestra un error en caso de ser necesario
-    const eliminarTarea = id => {
-        dispatch({
-            type: ELIMINAR_TAREA,
-            payload: id
-        })
+    const eliminarTarea = async (id, proyecto) => {
+        try {
+            await clienteAxios.delete(`/api/tareas/${id}`, { params: { proyecto } });
+            dispatch({
+                type: ELIMINAR_TAREA,
+                payload: id
+            })
+        } catch (error) {
+
+        }
     }
 
     // Cambia el estado de la tarea

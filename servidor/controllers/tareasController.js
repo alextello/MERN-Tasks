@@ -92,7 +92,7 @@ const eliminarTarea = async (req, res) => {
     }
 
     // Extraer el proyecto y tarea
-    const proyectoId = req.body.proyecto;
+    const proyectoId = req.query.proyecto;
     const tareaId = req.params.id;
     try {
         // Verificar dueño de proyecto

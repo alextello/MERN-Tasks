@@ -10,9 +10,9 @@ const Tarea = ({tarea}) => {
 
 
     // Funcion que elimina tarea
-    const onClick = () => {
-        eliminarTarea(tarea.id);
-        obtenerTareas(tarea.proyectoId);
+    const onClickEliminar = (id) => {
+        eliminarTarea(id, tarea.proyecto);
+        obtenerTareas(tarea.proyecto);
     }
 
     // Funcion para cambiar estado de tarea
@@ -48,7 +48,7 @@ const Tarea = ({tarea}) => {
                 <button
                 type="button"
                 className="btn btn-secundario"
-                onClick={onClick}
+                onClick={() => onClickEliminar(tarea._id)}
                 >
                     Eliminar
                 </button>
